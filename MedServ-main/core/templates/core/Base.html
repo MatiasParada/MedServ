@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>Medserv </title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    {% block stylesheet %} {% endblock %}
+</head>
+<body>
+    {% block navbar %}
+        <script>
+            $(document).ready(function(){
+                set_nav_li("#inicio", "{% url 'home' %}");
+                set_nav_li("#tienda", "{% url 'tienda' %}");
+                set_nav_li("#regist", "{% url 'registrar_usuario' %}");
+                set_nav_li("#inises", "{% url 'InicioSesion' %}");
+                set_nav_li("#cerses", "{% url 'cerrar_sesion' %}");
+
+                function set_nav_li(id, url) {
+                    $(id).addClass('nav-item list-inline-item align-center nav_item_text');
+                    name = $(id).html();
+                    $(id).html('');
+                    $(id).append(`<a href="${url}">${name}</a>`)
+                }
+            });
+        </script>
+        <nav id="navbar">
+            <div id="nav">
+                <ul class="list-inline">
+
+                    {% if not user.is_authenticated and not user.is_staff %}
+                        <li id="regist">Registrarme</li>
+                    {% endif %}
+                    
+                    {% if not user.is_authenticated %}
+                        <li id="inises">Iniciar sesión</li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        <li id="chpass">Cambiar contraseña</li>
+                        <li id="cerses">Cerrar sesión</li>
+                        <li id="tienda">Tienda</li>
+                        <li id="perfil">{{ user.get_full_name }}</li>
+                    {% endif %}
+                    
+                </ul>
+            </div>                                 
+        </nav>
+        <hr>
+    {% endblock %}
+
+    <div class="content container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="text-center">
+            <hr>
+            <br><br><br>
+            <span><a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administrar sistema</a></span>
+        </div>
+    </footer>
+</body>
+</html>

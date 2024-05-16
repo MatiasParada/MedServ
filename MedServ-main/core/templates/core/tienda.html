@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'core/css/forms.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>Buenos Aires</h1>
+    {% if list %}
+        <div class="row text-center">
+        {% for ve in list %}
+            <a href="{% url 'ficha' ve.idp %}">
+                <div class="tienda_auto_recuadro">
+                    <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_auto_recuadro">
+                        <img src="/media/{{ ve.foto_prod }}" class="ficha_auto_imagen" alt="">
+                    </div>
+                    <div>
+                        {{ ve.nomprod }}
+                    </div>
+                </div>
+            </a>
+
+        {% endfor %}
+        </div>
+        {% else %} 
+        <div>
+            <div class="text-center">
+                <hr>
+                <br><br><br>
+                <span><a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar Base de Datos</a></span>&nbsp&nbsp&nbsp
+                <span><a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administrar sistema</a></span>
+            </div>
+        </div>
+    {% endif %}
+    <div class="tienda_link_home">
+        <a href="{% url 'home' %}" class="btn btn-info btn-sm">Ir a la página de inicio</a>
+    </div>
+{% endblock content %}

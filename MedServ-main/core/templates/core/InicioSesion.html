@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'core/css/iniciar_sesion.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>Iniciar Sesión</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 borde_formulario">
+                <form method="POST" action="" enctype="multipart/form-data" id="formulario" required>
+                    <div class="centrar">
+                        {% csrf_token %} {{ form.as_p }}
+                        <input type="submit" class="btn btn-primary" value="Ingresar">
+                        {% if mesg %}
+                        <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
