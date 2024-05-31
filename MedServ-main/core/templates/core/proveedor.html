@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+<link href="{% static 'core/css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block Script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#consumir-api-btn').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "http://127.0.0.1:4000/api/v1/Productos/",
+                method: "GET",
+                success: function(data) {
+                    console.log(data); // Imprime los datos en la consola del navegador
+                    // Aquí puedes procesar los datos y mostrarlos en la página si lo deseas
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
+
+
+function renderProductos(data) {
+    $('#productos-container').empty(); // Limpia el contenedor antes de agregar productos
+
+    // Itera sobre los productos recibidos y los agrega al contenedor
+    data.forEach(function(producto) {
+        $('#productos-container').append(
+            `<a href="/ficha/${producto.idp}">
+                <div class="tienda_auto_recuadro">
+                    <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_auto_recuadro">
+                        <img src="${producto.foto_prod}" class="ficha_auto_imagen" alt="">
+                    </div>
+                    <div>
+                        ${producto.nomprod}
+                    </div>
+                </div>
+            </a>`
+        );
+    });
+}
+</script>
+
+
+
+{% endblock %}
+
+{% block content %}
+<div id="productos-container" class="container">
+    <h2 class="text-center">Productos en stock en MedServ</h2>
+    <div class="row">
+        {% for producto in productos_bd %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'ficha' producto.idp %}" class="text-decoration-none text-dark">
+                <div class="card">
+                    <img src="/media/{{ producto.foto_prod }}" class=class="card-img-top img-fluid"  alt="{{ producto.nomprod }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nomprod }}</h5>
+                        <p class="card-text">Stock: {{ producto.stock }}</p>
+                        <p class="card-text">Precio: {{ producto.precio }}</p>
+                        <p class="card-text">ID: {{ producto.idp }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center">Productos del proveedor</h2>
+        <div class="row text-center">
+            {% for producto in productos_api %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ producto.foto_prod }}" class="card-img-top ficha_auto_imagen img-fluid" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nomprod }}</h5>
+                        <p class="card-text">Stock: {{ producto.stock }}</p>
+                        <p class="card-text">Precio: {{ producto.precio }}</p>
+                        <form method="POST" action="{% url 'agregar_producto' producto.idp %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="nombre" value="{{ producto.nomprod }}">
+                            <input type="hidden" name="descripcion" value="{{ producto.descprod }}">
+                            <input type="hidden" name="precio" value="{{ producto.precio }}">
+                            <input type="hidden" name="foto" value="{{ producto.foto_prod }}">
+                            <input type="hidden" name="stock" value="{{ producto.stock }}">
+                            <button type="submit" class="btn btn-primary">Agregar al stock</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<div class="text-center">
+    <hr>
+    <br><br><br>
+    <span><a href="{% url 'poblar_bd' %}" class="btn btn-info btn-sm">Poblar Base de Datos</a></span>
+    <span><a href="#" id="consumir-api-btn" class="btn btn-info btn-sm">Consumir API (consola)</a></span>
+    <span><a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administrar sistema</a></span>
+</div>
+{% endblock content %}
+

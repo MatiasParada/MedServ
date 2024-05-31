@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %} {% load static %} {% block stylesheet %}
+<link href="{% static 'core/css/forms.css'%}" rel="stylesheet"> {% endblock %} {% block content %}
+<h1>Tienda MedServ</h1>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_auto_recuadro">
+            <img src="/media/{{ maestroproducto.foto_prod }}" class="ficha_auto_imagen" alt="">
+        </div>
+        <div class="mx-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 ficha_datos_recuadro">
+            <h2>
+                
+                {% if user.is_authenticated and  user.is_staff %}
+            
+                ID: {{ maestroproducto.idp }}
+                
+            {% endif %}
+
+                <h2>
+                    Nombre: {{ maestroproducto.nomprod }}
+                </h2>
+                <h2>
+                    Descripcion: {{ maestroproducto.descprod }}
+                </h2>
+                <h2>
+                    Precio: {{ maestroproducto.precio }}
+                </h2>
+                <h2>
+                    Stock: {{ maestroproducto.stock }}
+                </h2>
+                <br>
+                <form method="POST">
+                    <input type="submit" class="btn btn-primary" value="Comprar"> {% if mesg %}
+                    <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+                    {% endif %}
+                </form>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'tienda' %}" class="btn btn-info btn-sm">Ir a la tienda</a>&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'home' %}" class="btn btn-info btn-sm">Ir a la página de inicio</a>
+</div>
+{% endblock content %}

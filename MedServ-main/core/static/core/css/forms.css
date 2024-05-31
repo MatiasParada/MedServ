@@ -1,0 +1,178 @@
+h1 {
+    text-align: center !important;
+}
+
+#formulario label {
+    width: 150px;
+}
+
+.btnwidth {
+    width: 90px;
+}
+
+#tabla_datos {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    border: 1px solid gray;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#tabla_datos th, td {
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+#tabla_datos th {
+    background-color: lightgray;
+    color: black;
+}
+
+#tabla_datos tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+.titulo_boton {
+    width: 65;
+}
+
+.boton_chico {
+    font-size: 0.7em;
+    width: 60px;
+}
+
+#form_message {
+    margin-top: 20px;
+}
+
+.mini_auto {
+    width: 100px;
+}
+
+.tienda_auto_recuadro {
+    width: 250px;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    border: 5px outset #1C6EA4;
+}
+
+.tienda_auto_imagen {
+    width: 200px;
+    margin:auto;
+}
+
+.tienda_auto_recuadro_interior {
+    width: 205px;
+    height: 155px;
+    /* border:1px solid blue; */
+    margin:auto;
+}
+
+.tienda_link_home {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ficha_auto_recuadro {
+    padding:10px;
+    border: 5px outset #1C6EA4;
+}
+
+.ficha_auto_imagen {
+    width: 100%;
+    margin:auto;
+}
+
+.ficha_datos_recuadro {
+    padding:10px;
+}
+
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+main {
+    padding: 20px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.no-products {
+    text-align: center;
+}
+
+.options {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.options a {
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}

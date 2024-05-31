@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'core/css/perfil_usuario.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1>Actualizar Perfil de Usuario</h1>
+        <div class="content container text-center">
+            <form method="POST" class="col-sm-12 col-md-6">
+                {% csrf_token %} {{ form.as_p }}
+                <div class="btn_guardar">
+                    <button class="btn btn-primary" type="submit">Actualizar datos de perfil</button>
+                </div>
+                {% if mesg %}
+                <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}
