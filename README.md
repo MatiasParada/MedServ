@@ -22,11 +22,11 @@ Pasos para hacer un ambiente virtual 1 crear ambiente virtual con python python 
 
 Luego ejecutar en consola:
 
-\MedServ-main\MedServ-main> py manage.py makemigrations
-\MedServ-main\MedServ-main> py manage.py migrate
+MedServ-main\MedServ-main> py manage.py makemigrations
+MedServ-main\MedServ-main> py manage.py migrate
 
 Crear usuario administrador
-\MedServ-main\MedServ-main> py manage.py createsuperuser
+MedServ-main\MedServ-main> py manage.py createsuperuser
 admin
 --sin correo
 1234
