@@ -5,4 +5,5 @@ pytz==2022.1
 pillow==10.3.0
 sqlparse==0.4.2
 tzdata==2022.1
+django-cors-headers==4.3.1
 transbank-sdk==3.0.0
